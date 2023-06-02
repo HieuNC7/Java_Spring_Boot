@@ -1,12 +1,12 @@
 package com.springboot.demo.week3.service;
 
 import com.springboot.demo.week3.dto.CreateUserDto;
-import com.springboot.demo.week3.entity.User;
-import java.util.List;
+import com.springboot.demo.week3.dto.ResponseCreateUser;
+import com.springboot.demo.week3.dto.ResponseListUser;
 
 public interface UserService {
 
-  List<User> getListUser();
+  ResponseListUser getListUser();
 
-  Long createUser(CreateUserDto userDto);
+  ResponseCreateUser createUser(CreateUserDto userDto);
 }
