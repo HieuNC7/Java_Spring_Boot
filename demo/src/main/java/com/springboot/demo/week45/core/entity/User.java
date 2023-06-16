@@ -1,4 +1,4 @@
-package com.springboot.demo.week3.entity;
+package com.springboot.demo.week45.core.entity;
 
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
