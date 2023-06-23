@@ -1,5 +1,6 @@
 package com.springboot.demo.week45.api.domain.user.search;
 
+import com.springboot.demo.week45.core.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,13 +12,21 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserSearchRequest {
+public class UserDataSearchResponse {
 
   private long id;
   private String fullName;
   private String email;
   private String phoneNumber;
   private String address;
-  private long limit;
-  private long offset;
+
+  public static UserDataSearchResponse of(User user) {
+    return UserDataSearchResponse.builder()
+        .id(user.getId())
+        .fullName(user.getFullName())
+        .email(user.getEmail())
+        .phoneNumber(user.getPhoneNumber())
+        .address(user.getAddress())
+        .build();
+  }
 }
