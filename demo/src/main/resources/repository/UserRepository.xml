@@ -4,7 +4,7 @@
 <mapper namespace="com.springboot.demo.week45.core.repository.UserRepository">
   <insert
     flushCache="true"
-    id="createUser"
+    id="create"
     parameterType="com.springboot.demo.week45.core.entity.User"
     timeout="20"
     keyProperty="id"
@@ -25,7 +25,7 @@
   </insert>
   <update
     flushCache="true"
-    id="updateUser"
+    id="update"
     parameterType="com.springboot.demo.week45.core.entity.User"
     timeout="20">
     <![CDATA[
@@ -40,26 +40,35 @@
        id = #{id}
     ]]>
   </update>
-  <select id="findAllUser" resultType="com.springboot.demo.week45.core.entity.User">
-    <![CDATA[
+  <select id="list" resultType="com.springboot.demo.week45.core.entity.User">
     SELECT * FROM user
-    ]]>
+    WHERE 1=1
+      <if test="fullName != null">AND lower(full_name) LIKE lower(concat('%',#{fullName},'%'))</if>
+      <if test="email != null">AND lower(email) LIKE lower(concat('%',#{email},'%'))</if>
+      <if test="phoneNumber != null">AND phone_number LIKE concat('%',#{phoneNumber},'%')</if>
+      <if test="address != null">AND lower(address) LIKE lower(concat('%',#{address},'%'))</if>
+    ORDER BY id ASC
+    LIMIT #{limit}
+    OFFSET #{offset}
   </select>
-  <select id="findUser" resultType="com.springboot.demo.week45.core.entity.User">
+  <select id="findById" resultType="com.springboot.demo.week45.core.entity.User">
     <![CDATA[
     SELECT * FROM user WHERE id = #{id}
     ]]>
   </select>
   <delete
-    id="deleteAllUsers"
+    id="deleteAllById"
     parameterType="com.springboot.demo.week45.core.entity.User"
     timeout="20">
     <![CDATA[
-    DELETE FROM user
+    DELETE FROM user WHERE id IN
     ]]>
+    <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+      #{item}
+    </foreach>
   </delete>
   <delete
-    id="deleteUser"
+    id="deleteById"
     parameterType="com.springboot.demo.week45.core.entity.User"
     timeout="20">
     <![CDATA[
