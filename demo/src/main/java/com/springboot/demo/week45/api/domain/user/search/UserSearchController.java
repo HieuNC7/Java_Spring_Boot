@@ -2,6 +2,7 @@ package com.springboot.demo.week45.api.domain.user.search;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,12 +18,13 @@ public class UserSearchController {
 
   @GetMapping
   public ResponseEntity<UserSearchResponse> search(
+      Authentication authentication,
       @RequestParam String name,
       @RequestParam String email,
       @RequestParam String phoneNumber,
       @RequestParam String address,
-      @RequestParam(defaultValue = "0") long pageIndex,
-      @RequestParam(defaultValue = "10") long pageSize) {
+      @RequestParam(defaultValue = "0") int pageIndex,
+      @RequestParam(defaultValue = "10") int pageSize) {
     return ResponseEntity.ok(
         userSearchService.list(
             UserSearchRequest.builder()

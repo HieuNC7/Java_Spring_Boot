@@ -40,7 +40,7 @@
        id = #{id}
     ]]>
   </update>
-  <select id="list" resultType="com.springboot.demo.week45.core.entity.User">
+  <select id="list" parameterType="com.springboot.demo.week45.api.domain.user.search.UserSearchRequest" resultType="com.springboot.demo.week45.core.entity.User">
     SELECT * FROM user
     WHERE 1=1
       <if test="fullName != null">AND lower(full_name) LIKE lower(concat('%',#{fullName},'%'))</if>
@@ -48,8 +48,6 @@
       <if test="phoneNumber != null">AND phone_number LIKE concat('%',#{phoneNumber},'%')</if>
       <if test="address != null">AND lower(address) LIKE lower(concat('%',#{address},'%'))</if>
     ORDER BY id ASC
-    LIMIT #{limit}
-    OFFSET #{offset}
   </select>
   <select id="findById" resultType="com.springboot.demo.week45.core.entity.User">
     <![CDATA[
