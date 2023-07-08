@@ -6,6 +6,7 @@ import com.springboot.demo.week45.core.repository.UserRepository;
 import java.util.Collections;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.session.RowBounds;
 
 @RequiredArgsConstructor
 @org.springframework.stereotype.Service
@@ -15,7 +16,8 @@ public class UserSearchService implements Search<UserSearchRequest, UserSearchRe
 
   @Override
   public UserSearchResponse list(UserSearchRequest request) {
-    List<User> userList = userRepository.list(request);
+    RowBounds rowBounds = new RowBounds(request.getOffset(), request.getLimit());
+    List<User> userList = userRepository.list(request, rowBounds);
     return UserSearchResponse.of(userList.stream().map(UserDataSearchResponse::of).toList());
   }
 

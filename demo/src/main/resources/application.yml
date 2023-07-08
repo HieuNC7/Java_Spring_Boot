@@ -1,4 +1,29 @@
+server:
+  port : 8081
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          oauth:
+            client-id: 'demo'
+            client-secret: 'drfevQFbXhbewYJNhbM30mfYoRBwAy7e'
+            authorization-grant-type: 'authorization_code'
+            scope: 'openid'
+            issuer-uri: 'http://localhost:8080/realms/auth'
+            redirect-uri: 'http://localhost:8081/login/oauth2/code/demo'
+        provider:
+          oauth:
+            authorization-uri: 'http://localhost:8080/realms/auth/protocol/openid-connect/auth'
+            token-uri: 'http://localhost:8080/realms/auth/protocol/openid-connect/token'
+            user-info-uri: 'http://localhost:8080/realms/auth/protocol/openid-connect/userinfo'
+            user-name-attribute: 'sub'
+            jwk-set-uri: 'http://localhost:8080/realms/auth/protocol/openid-connect/certs'
+            issuer-uri: 'http://localhost:8080/realms/auth'
+      resourceserver:
+        jwt:
+          issuer-uri: 'http://localhost:8080/realms/auth'
+          jwt-set-uri: 'http://localhost:8080/realms/auth/protocol/openid-connect/certs'
   flyway:
     locations: db/migration
   datasource:

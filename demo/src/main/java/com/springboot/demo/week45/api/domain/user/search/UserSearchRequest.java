@@ -18,6 +18,10 @@ public class UserSearchRequest {
   private String email;
   private String phoneNumber;
   private String address;
-  private long limit;
-  private long offset;
+  private int limit;
+  private int offset;
+
+  public UserSearchRequest(String email) {
+    this.email = email;
+  }
 }
