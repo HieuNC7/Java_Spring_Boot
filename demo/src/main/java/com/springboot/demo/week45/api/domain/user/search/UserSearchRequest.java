@@ -20,4 +20,8 @@ public class UserSearchRequest {
   private String address;
   private int limit;
   private int offset;
+
+  public UserSearchRequest(String email) {
+    this.email = email;
+  }
 }

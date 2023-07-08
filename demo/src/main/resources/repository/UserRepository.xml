@@ -15,11 +15,15 @@
       ,email
       ,phone_number
       ,address
+      ,created_at
+      ,created_by
     ) VALUES (
       #{fullName}
       ,#{email}
       ,#{phoneNumber}
       ,#{address}
+      ,#{createdAt}
+      ,#{createdBy}
     )
     ]]>
   </insert>
